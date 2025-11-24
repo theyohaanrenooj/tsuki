@@ -4,7 +4,7 @@ import pygame, sys
 # local imports
 from .consts import *
 
-class MagnumOpus():
+class Tsuki():
     def __init__(self,init,update,draw,events):
 
         # initialize everything
@@ -13,8 +13,11 @@ class MagnumOpus():
         # window init
         self.win = pygame.display.set_mode(win_size)
         pygame.display.set_caption(win_title)
+        self.cl = pygame.time.Clock()
 
+        # main loop
         while True:
+            # clearing window
             self.win.fill((0,0,0))
 
             # events
@@ -33,3 +36,4 @@ class MagnumOpus():
             draw()
 
             pygame.display.update()
+            self.cl.tick(frame_rate)
