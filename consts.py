@@ -1,5 +1,3 @@
-import pygame
-
 # window
 win_size: tuple[int,int] = (800,600)
 win_title: str = "Tsuki Window"

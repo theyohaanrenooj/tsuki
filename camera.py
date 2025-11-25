@@ -1,14 +1,17 @@
 from .consts import win_size
+from .image import textures
 
 class Camera:
     def __init__(self) -> None:
-        self.scroll = [0,0]
+        self.scroll = [0,0] # scroll acts like an offset
         self.smoothing = 0.2
 
     def follow(self, entity) -> None:
-        target_x = entity.pos[0] + entity.width  / 2 - win_size[0] / 2
-        target_y = entity.pos[1] + entity.height / 2 - win_size[1] / 2
+        # target
+        target_x = entity.pos[0] + textures[entity.img_id].width  / 2 - win_size[0] / 2
+        target_y = entity.pos[1] + textures[entity.img_id].height / 2 - win_size[1] / 2
 
+        # change scroll relative to target with smoothing
         self.scroll[0] += (target_x - self.scroll[0]) * self.smoothing
         self.scroll[1] += (target_y - self.scroll[1]) * self.smoothing
 

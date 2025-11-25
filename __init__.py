@@ -11,6 +11,7 @@ from OpenGL.GLU import *
 
 # local imports
 from .consts import *
+from .image import *
 from .entity import *
 from .camera import *
 
@@ -22,7 +23,24 @@ if debug:
 
 class Tsuki():
     def __init__(self,Game):
+        # pygame init
+        self.pygame_init()
 
+        # gl functions init
+        self.gl_init()
+
+        # initial init
+        self.game = Game()
+        if debug:
+            print("initialized game!")
+
+        # rendering init
+        self.render_init()
+
+        # main loop
+        self.loop()
+
+    def pygame_init(self):
         # initialize engine stuff
         pygame.init()
 
@@ -33,20 +51,14 @@ class Tsuki():
         if debug:
             print("Initialized Pygame!")
 
-        # image init
+    def gl_init(self):
         glEnable(GL_TEXTURE_2D)
         glEnable(GL_BLEND) # transparency enabled
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
         if debug:
             print("Initialized gl settings!")
 
-        # initial init
-        self.game = Game()
-        if debug:
-            print("initialized game!")
-
-        # rendering init
-
+    def render_init(self):
         # Setup projection (simple 2D)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
@@ -57,7 +69,7 @@ class Tsuki():
         if debug:
             print("initialized window projections!")
 
-        # main loop
+    def loop(self):
         while True:
             # clearing window
             glClear(GL_COLOR_BUFFER_BIT)
