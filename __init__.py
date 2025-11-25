@@ -9,7 +9,7 @@ from .consts import *
 from .entity import *
 
 class Tsuki():
-    def __init__(self,update,events):
+    def __init__(self,Game):
 
         # initialize engine stuff
         pygame.init()
@@ -23,6 +23,9 @@ class Tsuki():
         glEnable(GL_TEXTURE_2D)
         glEnable(GL_BLEND) # transparency enabled
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+
+        # initial init
+        self.game = Game()
 
         # rendering init
         
@@ -42,16 +45,16 @@ class Tsuki():
             # events
             for event in pygame.event.get():
                 # events
-                events(event)
+                self.game.events(event)
 
                 if event.type == pygame.QUIT:
                     sys.exit()
             
             # update method
-            update()
+            self.game.update()
 
             # draw
-            draw_entities()
+            draw_group()
 
             pygame.display.flip()
             self.cl.tick(frame_rate)
