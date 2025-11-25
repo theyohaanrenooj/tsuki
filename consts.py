@@ -1,8 +1,9 @@
 import pygame
 
 # window
-win_size = (800,600)
-win_title = "Tsuki Window"
+win_size: tuple[int,int] = (800,600)
+win_title: str = "Tsuki Window"
 
 # display
-frame_rate = 60
+frame_rate: int = 60
+debug: bool = True
