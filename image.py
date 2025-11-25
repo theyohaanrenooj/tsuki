@@ -16,7 +16,7 @@ class Texture:
 textures: dict[str,Texture] = {}
 
 def load_texture(id:str, path: str, scale=1):
-    img = pygame.image.load(path)
+    img = pygame.image.load(path).convert_alpha()
     img_data = pygame.image.tostring(img, "RGBA", True)
     width, height = img.get_size()
 

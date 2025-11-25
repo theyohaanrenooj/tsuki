@@ -5,16 +5,17 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
 # global imports
 import pygame, sys
+import numpy as np
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
+
 
 # local imports
 from .consts import *
 from .image import *
 from .entity import *
 from .camera import *
-
 
 # core component
 camera = Camera()
