@@ -9,7 +9,7 @@ from .consts import *
 from .entity import *
 
 class Tsuki():
-    def __init__(self,init,update,events):
+    def __init__(self,update,events):
 
         # initialize engine stuff
         pygame.init()
@@ -23,9 +23,6 @@ class Tsuki():
         glEnable(GL_TEXTURE_2D)
         glEnable(GL_BLEND) # transparency enabled
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-
-        # local src init
-        init()
 
         # rendering init
         

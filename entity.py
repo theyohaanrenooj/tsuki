@@ -11,7 +11,7 @@ class Entity:
     def __init__(self,name="entity",img_path="tsuki/no.png",pos=[0,0]):
         # default values
         self.name = name
-        self.img = load_texture(img_path)
+        self.img, self.width, self.height = load_texture(img_path)
         self.pos = pos
 
         # conditional values
@@ -28,8 +28,8 @@ def draw_entities():
                 glBindTexture(GL_TEXTURE_2D,entity.img)
 
                 glBegin(GL_QUADS)
-                glTexCoord2f(0, 0); glVertex2f(100, 100)   # bottom-left
-                glTexCoord2f(1, 0); glVertex2f(300, 100)   # bottom-right
-                glTexCoord2f(1, 1); glVertex2f(300, 300)   # top-right
-                glTexCoord2f(0, 1); glVertex2f(100, 300)   # top-left
+                glTexCoord2f(0, 0); glVertex2f(entity.pos[1]               , entity.pos[1]                )   # bottom-left
+                glTexCoord2f(1, 0); glVertex2f(entity.pos[0] + entity.width, entity.pos[1]                )   # bottom-right
+                glTexCoord2f(1, 1); glVertex2f(entity.pos[0] + entity.width, entity.pos[1] + entity.height)   # top-right
+                glTexCoord2f(0, 1); glVertex2f(entity.pos[0]               , entity.pos[1] + entity.height)   # top-left
                 glEnd()

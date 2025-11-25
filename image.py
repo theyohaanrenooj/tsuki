@@ -3,7 +3,7 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-def load_texture(path):
+def load_texture(path, scale=0.5):
     img = pygame.image.load(path)
     img_data = pygame.image.tostring(img, "RGBA", True)
     width, height = img.get_size()
@@ -19,4 +19,4 @@ def load_texture(path):
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
 
-    return texture_id
+    return texture_id, width * scale, height * scale # returns texture data, width and height (adjusted to scale)
