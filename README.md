@@ -12,35 +12,47 @@ a non gui, game engine based on top of opengl for rendering and [pygame](https:/
 ## Basic Example
 
 ```python
+# game.py
+
 import tsuki, pygame
 
-class Game:
-    def __init__(self):
-        self.preload() # for loading images
 
-        self.player = tsuki.Entity(name="player",texture_id="test")
-        self.test = tsuki.Entity(name="testbox",texture_id="test")
+def preload():
 
-        self.player_speed = 4
+    # load texture with id
+    tsuki.load_texture("tsuki","tsuki/no.png",scale=0.1)
 
-    def preload(self):
-        tsuki.load_texture("test","Untitled.png") # load a texture with id test
+preload() # for loading images
 
-    def update(self):
-        tsuki.camera.follow(self.player)
+# init
+player = tsuki.Entity(name="player",pos=[100,100],texture_id="tsuki")
 
-        keys = pygame.key.get_pressed()
-        if keys[tsuki.K_d]:
-            self.player.pos[0] += self.player_speed
-        elif keys[tsuki.K_a]:
-            self.player.pos[0] -= self.player_speed
+player_speed = 5
 
-        if keys[tsuki.K_w]:
-            self.player.pos[1] += self.player_speed
-        elif keys[tsuki.K_s]:
-            self.player.pos[1] -= self.player_speed
+def update():
+    tsuki.camera.follow(player)
 
-    def events(self, event):
-        pass
+    keys = pygame.key.get_pressed()
+    if keys[tsuki.K_d]:
+        player.pos[0] += (player_speed)
+    elif keys[tsuki.K_a]:
+        player.pos[0] += (-player_speed)
+
+    if keys[tsuki.K_w]:
+        player.pos[1] += (player_speed)
+    elif keys[tsuki.K_s]:
+        player.pos[1] += (-player_speed)
+
+def events(event):
+    pass
+
+
+```
+
+```python
+# main.py
+from tsuki import Tsuki
+
+game = Tsuki()
 
 ```

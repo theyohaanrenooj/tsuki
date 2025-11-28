@@ -4,7 +4,7 @@ import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
 # global imports
-import pygame, sys
+import pygame, sys, importlib
 import numpy as np
 from pygame.locals import *
 from OpenGL.GL import *
@@ -23,7 +23,7 @@ if debug:
     print("camera loaded!")
 
 class Tsuki():
-    def __init__(self,Game):
+    def __init__(self):
         # pygame init
         self.pygame_init()
 
@@ -31,7 +31,9 @@ class Tsuki():
         self.gl_init()
 
         # initial init
-        self.game = Game()
+        self.game = importlib.import_module("game")
+        self.update_func = getattr(self.game, "update", None)
+        self.events_func = getattr(self.game, "events", None)
         if debug:
             print("initialized game!")
 
@@ -78,13 +80,15 @@ class Tsuki():
             # events
             for event in pygame.event.get():
                 # events
-                self.game.events(event)
+                if self.events_func:
+                    self.events_func(event)
 
                 if event.type == pygame.QUIT:
                     sys.exit()
 
             # update method
-            self.game.update()
+            if self.update_func:
+                self.update_func()
 
             # draw
             draw_group(camera=camera)
