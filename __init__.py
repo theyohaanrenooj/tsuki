@@ -65,7 +65,7 @@ class Tsuki():
         # Setup projection (simple 2D)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-        gluOrtho2D(0, 800, 0, 600)
+        gluOrtho2D(0, win_size[0], 0, win_size[1])
 
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
