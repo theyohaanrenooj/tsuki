@@ -29,7 +29,10 @@ class Entity:
 
         # conditional values
         self.hidden = False
+
+        # render parameters
         self.bloom = False
+        self.bloom_strength = 5
 
          # adds entity to main entity group for rendering
         try:

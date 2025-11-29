@@ -47,8 +47,8 @@ class Group:
 
                                 # glow passes for effect
                                 if entity.bloom:
-                                    for i in range(1, 10):
-                                        scale = 1 + i * 0.25
+                                    for i in range(1, 10 * entity.bloom_strength):
+                                        scale = 1 + i * 0.125
                                         alpha = 0.25 / i  # weaker further out
 
                                         sw = entity.width * scale
