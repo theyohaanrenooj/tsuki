@@ -35,3 +35,16 @@ def load_texture(id:str, path: str, scale=1):
 
     if debug:
         print(f"Texture: '{id}' Loaded Successfully!")
+
+# draw image as texture
+def draw_texture(tex_data,x,z,w,h,scroll,alpha):
+    glBindTexture(GL_TEXTURE_2D,tex_data)
+    glColor4f(1, 1, 1, alpha)
+
+    # quad vertexes
+    glBegin(GL_QUADS)
+    glTexCoord2f(0, 0); glVertex2f(x     -scroll[0], z    -scroll[1])   # bottom-left
+    glTexCoord2f(1, 0); glVertex2f(x + w -scroll[0], z    -scroll[1])   # bottom-right
+    glTexCoord2f(1, 1); glVertex2f(x + w -scroll[0], z + h-scroll[1])   # top-right
+    glTexCoord2f(0, 1); glVertex2f(x     -scroll[0], z + h-scroll[1])   # top-left
+    glEnd()

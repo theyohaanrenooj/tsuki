@@ -5,6 +5,7 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
 # global imports
 import pygame, sys, importlib
+
 import numpy as np
 from pygame.locals import *
 from OpenGL.GL import *
@@ -16,8 +17,11 @@ from .consts import *
 from .image import *
 from .entity import *
 from .camera import *
+from .group import *
 
 # core component
+# initialize engine stuff
+pygame.init()
 camera = Camera()
 if debug:
     print("camera loaded!")
@@ -44,8 +48,6 @@ class Tsuki():
         self.loop()
 
     def pygame_init(self):
-        # initialize engine stuff
-        pygame.init()
 
         # window init
         self.win = pygame.display.set_mode(win_size,pygame.OPENGL | pygame.DOUBLEBUF)
@@ -90,8 +92,10 @@ class Tsuki():
             if self.update_func:
                 self.update_func()
 
-            # draw
-            draw_group(camera=camera)
+            # draw groups
+            sorted_groups = sorted(groups.items(), key=lambda item: item[1].y)
+            for name,group in sorted_groups:
+                group.draw(camera=camera)
 
             pygame.display.flip()
             self.cl.tick(frame_rate)
