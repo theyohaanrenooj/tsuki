@@ -3,7 +3,7 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from .image import load_texture, textures, draw_texture
+from .image import load_texture, draw_texture
 from .consts import debug
 
 
@@ -38,7 +38,6 @@ class Group:
             if self.entities:
                 for entity in self.entities:
                     if not entity.hidden:
-                        tex = textures[entity.img_id]
                         if camera and perf: # checking if camera is given if given then draw with performance
                             if camera.plane.colliderect(pygame.Rect(entity.pos[0],entity.pos[1],entity.width,entity.height)):
 
@@ -56,10 +55,12 @@ class Group:
                                         sx = entity.pos[0] - (sw - entity.width) / 2
                                         sz = entity.pos[1] - (sh - entity.height) / 2
 
-                                        draw_texture(tex.data, sx, sz, sw, sh, scroll, alpha)
+
+
+                                        draw_texture(entity.img, sx, sz, sw, sh, scroll, alpha)
 
                                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)  # restore normal blending
-                                draw_texture(tex.data,entity.pos[0],entity.pos[1],entity.width,entity.height,scroll,1.0)
+                                draw_texture(entity.img,entity.pos[0],entity.pos[1],entity.width,entity.height,scroll,1.0)
 
                         else: # if camera not given , draw normal without checking for camera plane collision
                             glEnable(GL_BLEND)
@@ -67,8 +68,8 @@ class Group:
 
                             # glow passes for effect
                             if entity.bloom:
-                                for i in range(1, 6):
-                                    scale = 1 + i * 0.25
+                                for i in range(1, 10 * entity.bloom_strength):
+                                    scale = 1 + i * 0.125
                                     alpha = 0.25 / i  # weaker further out
 
                                     sw = entity.width * scale
@@ -76,10 +77,12 @@ class Group:
                                     sx = entity.pos[0] - (sw - entity.width) / 2
                                     sz = entity.pos[1] - (sh - entity.height) / 2
 
-                                    draw_texture(tex.data, sx, sz, sw, sh, scroll, alpha)
+
+
+                                    draw_texture(entity.img, sx, sz, sw, sh, scroll, alpha)
 
                             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)  # restore normal blending
-                            draw_texture(tex.data,entity.pos[0],entity.pos[1],entity.width,entity.height,scroll,1.0)
+                            draw_texture(entity.img,entity.pos[0],entity.pos[1],entity.width,entity.height,scroll,1.0)
 
 
 # creating main group

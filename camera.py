@@ -1,5 +1,4 @@
 from .consts import win_size, debug
-from .image import textures
 import pygame
 
 class Camera:
@@ -10,8 +9,8 @@ class Camera:
 
     def follow(self, entity) -> None:
         # target
-        target_x = entity.pos[0] + textures[entity.img_id].width  / 2 - win_size[0] / 2
-        target_y = entity.pos[1] + textures[entity.img_id].height / 2 - win_size[1] / 2
+        target_x = entity.pos[0] + entity.width  / 2 - win_size[0] / 2
+        target_y = entity.pos[1] + entity.height / 2 - win_size[1] / 2
 
         # change scroll relative to target with smoothing
         self.scroll[0] += (target_x - self.scroll[0]) * self.smoothing
