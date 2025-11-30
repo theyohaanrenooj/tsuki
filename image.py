@@ -40,8 +40,8 @@ def draw_texture(texture,x,z,w,h,scroll,alpha):
 
     # quad vertexes
     glBegin(GL_QUADS)
-    glTexCoord2f(0, 0); glVertex2f(x     -scroll[0], z -scroll[1])   # bottom-left
-    glTexCoord2f(1, 0); glVertex2f(x + w -scroll[0], z -scroll[1])   # bottom-right
-    glTexCoord2f(1, 1); glVertex2f(x + h -scroll[0], z -scroll[1])   # top-right
-    glTexCoord2f(0, 1); glVertex2f(x     -scroll[0], z -scroll[1])   # top-left
+    glTexCoord2f(0, 0); glVertex2f(x     -scroll[0], z     -scroll[1])   # bottom-left
+    glTexCoord2f(1, 0); glVertex2f(x + w -scroll[0], z     -scroll[1])   # bottom-right
+    glTexCoord2f(1, 1); glVertex2f(x + w -scroll[0], z + h -scroll[1])   # top-right
+    glTexCoord2f(0, 1); glVertex2f(x     -scroll[0], z + h -scroll[1])   # top-left
     glEnd()

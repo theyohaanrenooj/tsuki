@@ -6,7 +6,6 @@ from OpenGL.GLU import *
 from .image import load_texture, draw_texture
 from .consts import debug
 
-
 groups = {}
 
 class Group:
@@ -55,8 +54,6 @@ class Group:
                                         sx = entity.pos[0] - (sw - entity.width) / 2
                                         sz = entity.pos[1] - (sh - entity.height) / 2
 
-
-
                                         draw_texture(entity.img, sx, sz, sw, sh, scroll, alpha)
 
                                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)  # restore normal blending
@@ -76,8 +73,6 @@ class Group:
                                     sh = entity.height * scale
                                     sx = entity.pos[0] - (sw - entity.width) / 2
                                     sz = entity.pos[1] - (sh - entity.height) / 2
-
-
 
                                     draw_texture(entity.img, sx, sz, sw, sh, scroll, alpha)
 
