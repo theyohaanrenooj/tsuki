@@ -43,3 +43,7 @@ class Entity:
         # debug
         if debug:
             print(f"Entity: '{self.name}' loaded successfully!")
+
+    def update_dimensions(self):
+        self.width = self.img.width
+        self.height = self.img.height

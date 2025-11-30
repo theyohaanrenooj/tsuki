@@ -18,6 +18,7 @@ from .image import *
 from .entity import *
 from .camera import *
 from .group import *
+from .animator import *
 
 # core component
 # initialize engine stuff

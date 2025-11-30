@@ -1,4 +1,4 @@
-import pygame
+import pygame, os
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -32,6 +32,16 @@ def load_texture(path: str, scale=1):
 
     if debug:
         print(f"Texture: Loaded Successfully!")
+
+def load_texture_frames(path:str,scale=1):
+    frames = []
+    if os.path.exists(path):
+        imgs = os.listdir(path)
+        if imgs:
+            for img_name in imgs:
+                frames.append(load_texture(os.path.join(path,img_name),scale=scale))
+
+    return frames
 
 # draw image as texture
 def draw_texture(texture,x,z,w,h,scroll,alpha):
