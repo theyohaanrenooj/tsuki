@@ -5,7 +5,7 @@ class Camera:
     def __init__(self) -> None:
         self.scroll = [0,0] # scroll acts like an offset
         self.smoothing = 0.2
-        self.plane = pygame.Rect(0,0,win_size[0]+20,win_size[1]+20)
+        self.plane = pygame.Rect(0,0,win_size[0]+100,win_size[1]+100)
 
     def follow(self, entity) -> None:
         # target
@@ -17,8 +17,8 @@ class Camera:
         self.scroll[1] += (target_y - self.scroll[1]) * self.smoothing
 
         # set pos of plane
-        self.plane.x = target_x-10
-        self.plane.y = target_y-10
+        self.plane.x = target_x-50
+        self.plane.y = target_y-50
 
     def set_pos(self,pos=(0,0)) -> None:
         target_x = pos[0] / 2 - win_size[0] / 2

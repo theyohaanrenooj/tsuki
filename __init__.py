@@ -77,6 +77,9 @@ class Tsuki():
 
     def loop(self):
         while True:
+            # delta time
+            dt = self.cl.tick(frame_rate) / 1000
+
             # clearing window
             glClear(GL_COLOR_BUFFER_BIT)
 
@@ -91,7 +94,7 @@ class Tsuki():
 
             # update method
             if self.update_func:
-                self.update_func()
+                self.update_func(dt)
 
             # draw groups
             sorted_groups = sorted(groups.items(), key=lambda item: item[1].y)
@@ -99,4 +102,3 @@ class Tsuki():
                 group.draw(camera=camera)
 
             pygame.display.flip()
-            self.cl.tick(frame_rate)
