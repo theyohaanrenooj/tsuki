@@ -5,6 +5,7 @@ from OpenGL.GLU import *
 
 from .image import load_texture, draw_texture
 from .consts import debug
+from .entity import Entity
 
 groups = {}
 
@@ -18,6 +19,8 @@ class Group:
 
     def add_entity(self,entity):
         self.entities.append(entity)
+
+
 
     def draw(self,camera=None,perf=True) -> None:
 
@@ -78,6 +81,15 @@ class Group:
 
                             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)  # restore normal blending
                             draw_texture(entity.img,entity.pos[0],entity.pos[1],entity.width,entity.height,scroll,1.0)
+
+    def disable(self):
+        self.disabled = True
+
+    def enable(self):
+        self.disabled = False
+
+    def get_entities(self) -> list[Entity]:
+        return self.entities
 
 
 # creating main group

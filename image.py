@@ -7,12 +7,18 @@ import numpy
 from .consts import debug, render_scale
 
 class Texture:
-    def __init__(self,tex_id,size):
-        self.data = tex_id
+    def __init__(self,tex_data,size):
+        self.data = tex_data
         self.width = size[0]
         self.height = size[1]
 
-def load_texture(path: str, scale=1):
+    def get_width(self):
+        return self.width
+
+    def get_height(self):
+        return self.width
+
+def load_texture(path: str, scale=1) -> Texture:
     img = pygame.image.load(path).convert_alpha()
     img_data = pygame.image.tostring(img, "RGBA", True)
     width, height = img.get_size()
@@ -33,7 +39,7 @@ def load_texture(path: str, scale=1):
     if debug:
         print(f"Texture: Loaded Successfully!")
 
-def load_texture_frames(path:str,scale=1):
+def load_texture_frames(path:str,scale=1) -> list[Texture]:
     frames = []
     if os.path.exists(path):
         imgs = os.listdir(path)
@@ -44,7 +50,7 @@ def load_texture_frames(path:str,scale=1):
     return frames
 
 # draw image as texture
-def draw_texture(texture,x,z,w,h,scroll,alpha):
+def draw_texture(texture: Texture,x: int,z: int,w: int,h: int,scroll: list[int],alpha:float) -> None:
     glBindTexture(GL_TEXTURE_2D,texture.data)
     glColor4f(1, 1, 1, alpha)
 

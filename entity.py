@@ -12,7 +12,7 @@ from .group import *
 
 # entity
 class Entity:
-    def __init__(self, name="tsuki", img=None,pos=(0,0),group="main") -> None:
+    def __init__(self, name="tsuki", img=None, pos=(0,0), group="main") -> None:
         # default values
         self.name = name # name
 
@@ -23,16 +23,16 @@ class Entity:
             self.img = tsuki_img
 
         # variables
-        self.pos = list(pos)
-        self.width = self.img.width
-        self.height = self.img.height
+        self.pos: list[int] = list(pos)
+        self.width: int = self.img.width
+        self.height: int = self.img.height
 
         # conditional values
-        self.hidden = False
+        self.hidden: bool = False
 
         # render parameters
-        self.bloom = False
-        self.bloom_strength = 5
+        self.bloom: bool = False
+        self.bloom_strength: float = 5
 
          # adds entity to main entity group for rendering
         try:
@@ -44,6 +44,15 @@ class Entity:
         if debug:
             print(f"Entity: '{self.name}' loaded successfully!")
 
-    def update_dimensions(self):
+    def get_pos(self) -> list[int]:
+        return self.pos
+
+    def hide(self) -> None:
+        self.hidden = True
+
+    def show(self) -> None:
+        self.hiddne = False
+
+    def update_dimensions(self) -> None:
         self.width = self.img.width
         self.height = self.img.height

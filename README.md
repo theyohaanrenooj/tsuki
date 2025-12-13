@@ -4,10 +4,11 @@ a non gui, game engine based on top of opengl for rendering and [pygame](https:/
 
 ## Features
 
-- Entity Management
+- Entity System
 - texture loader (with id)
 - camera system
 - entity group renderer
+- Animation Manager
 
 ## Basic Example
 
@@ -16,32 +17,51 @@ a non gui, game engine based on top of opengl for rendering and [pygame](https:/
 
 import tsuki, pygame
 
+tulip_img = tsuki.load_texture("tulip.png")
+grass_img = tsuki.load_texture("grass.png")
 
-def preload():
+frames = tsuki.load_texture_frames("slime")
 
-    # load texture with id
-    tsuki.load_texture("tsuki","tsuki/no.png",scale=0.1)
+# entities
+player = tsuki.Entity(
+    name="player",
+    pos=[100,100],
+    img=frames[0]
+)
+player_speed = 250
 
-preload() # for loading images
+anim_man = tsuki.AnimationManager(player)
+anim_man.add_animation("main",frames)
+anim_man.load_animation("main")
 
-# init
-player = tsuki.Entity(name="player",pos=[100,100],texture_id="tsuki")
+test = tsuki.Entity(
+    name="testbox",
+    img=tulip_img
+)
+test.bloom = True
 
-player_speed = 5
+# grass
+tsuki.Group(name="ground",y=-1)
+for z in range(100):
+    for x in range(100):
+        grass = tsuki.Entity(f"grass{x},{z}",pos=[x*64,z*64],img=grass_img,group="ground")
 
-def update():
+def update(dt):
     tsuki.camera.follow(player)
 
+    # movement
     keys = pygame.key.get_pressed()
     if keys[tsuki.K_d]:
-        player.pos[0] += (player_speed)
+        player.pos[0] += (player_speed) *dt
     elif keys[tsuki.K_a]:
-        player.pos[0] += (-player_speed)
+        player.pos[0] += (-player_speed) *dt
 
     if keys[tsuki.K_w]:
-        player.pos[1] += (player_speed)
+        player.pos[1] += (player_speed) *dt
     elif keys[tsuki.K_s]:
-        player.pos[1] += (-player_speed)
+        player.pos[1] += (-player_speed) *dt
+
+    anim_man.update()
 
 def events(event):
     pass
@@ -56,3 +76,5 @@ from tsuki import Tsuki
 game = Tsuki()
 
 ```
+
+then just run main.py

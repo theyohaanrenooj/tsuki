@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Tsuki Docs</title>
+        <style>
+            h1 {
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>animator.py</h1>
+        <h2>class Animation</h2>
+        <h2>--def __init__(self,frames,delay)</h2>
+        <h2>class AnimationManager()</h2>
+        <h2>--def __init__(self,entity)</h2>
+        <h2>--def add_animation(self,name,frames,delay=10)</h2>
+        <h2>--def load_animation(self,name)</h2>
+        <h2>--def update(self)</h2>
+
+        <h1>camera.py</h1>
+        <h2>class Camera</h2>
+        <h2>--def __init__(self) -> None</h2>
+        <h2>--def follow(self, entity) -> None</h2>
+        <h2>--def set_pos(self,pos=(0,0)) -> None</h2>
+
+        <h1>consts.py</h1>
+        <h2>win_size: tuple[int,int] = (1280,720)</h2>
+        <h2>win_title: str = "Tsuki Window"</h2>
+        <h2>render_scale: int = 2</h2>
+        <h2>frame_rate: int = 60</h2>
+        <h2>debug: bool = True</h2>
+
+        <h1>entity.py</h1>
+        <h2>class Entity</h2>
+        <h2>
+            --def __init__(self, name="tsuki", img=None, pos=(0,0),
+            group="main") -> None
+        </h2>
+        <h2>--def get_pos(self) -> list[int]</h2>
+        <h2>--def hide(self) -> None</h2>
+        <h2>--def show(self) -> None</h2>
+        <h2>--def update_dimensions(self) -> None</h2>
+
+        <h1>group.py</h1>
+        <h2>class Group</h2>
+        <h2>--def __init__(self,name="main", y=0)</h2>
+        <h2>--def add_entity(self,entity)</h2>
+        <h2>--def draw(self,camera=None,perf=True) -> None</h2>
+        <h2>--def disable(self)</h2>
+        <h2>--def enable(self)</h2>
+        <h2>--def get_entities(self) -> list[Entity]</h2>
+
+        <h1>image.py</h1>
+        <h2>class Texture</h2>
+        <h2>--def __init__(self,tex_data,size)</h2>
+        <h2>--def get_width(self)</h2>
+        <h2>--def get_height(self)</h2>
+        <h2>def load_texture(path str, scale=1) -> Texture</h2>
+        <h2>def load_texture_frames(pathstr,scale=1) -> list[Texture]</h2>
+        <h2>
+            def draw_texture(texture Texture,x int,z int,w int,h int,scroll
+            list[int],alphafloat) -> None
+        </h2>
+
+        <h1>__init__.py</h1>
+        <h2>class Tsuki()</h2>
+        <h2>--def __init__(self)</h2>
+        <h2>--def pygame_init(self)</h2>
+        <h2>--def gl_init(self)</h2>
+        <h2>--def render_init(self)</h2>
+        <h2>--def loop(self)</h2>
+    </body>
+</html>
